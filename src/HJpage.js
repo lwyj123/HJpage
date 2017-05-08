@@ -1,10 +1,3 @@
-/**
-
-@Name : layui.laypage 分页组件
-@Author：贤心
-@License：MIT
-
-*/
 "use strict";
 
 function laypage(options){
@@ -20,19 +13,14 @@ var index = 0, Page = function(options){
   that.render(true);
 };
 
+/**
+ * 事件绑定兼容实现
+ */
 Page.on = function(elem, even, fn){
   elem.attachEvent ? elem.attachEvent('on'+ even, function(){
     fn.call(elem, window.even); //for ie, this指向为当前dom元素
   }) : elem.addEventListener(even, fn, false);
   return Page;
-};
-
-//判断传入的容器类型
-Page.prototype.type = function(){
-  var conf = this.config;
-  if(typeof conf.cont === 'object'){
-    return conf.cont.length === undefined ? 2 : 3;
-  }
 };
 
 //分页视图
@@ -139,15 +127,10 @@ Page.prototype.jump = function(elem){
 
 //渲染分页
 Page.prototype.render = function(load){
-  var that = this, conf = that.config, type = that.type();
+  var that = this, conf = that.config;
   var view = that.view();
-  if(type === 2){
-    conf.cont.innerHTML = view;
-  } else if(type === 3){
-    conf.cont.html(view);
-  } else {
-    doc[id](conf.cont).innerHTML = view;
-  }
+  conf.cont.innerHTML = view;
+
   conf.jump && conf.jump(conf, load);
   that.jump(doc[id]('layui-laypage-' + conf.item));
   if(conf.hash && !load){
