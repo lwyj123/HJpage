@@ -88,7 +88,7 @@ Page.prototype.view = function(){
     }()));
   }
 
-  return '<div class="layui-box layui-laypage layui-laypage-'+ (conf.skin ? (function(skin){
+  return '<div class="hjpage-box layui-laypage layui-laypage-'+ (conf.skin ? (function(skin){
     return /^#/.test(skin) ? 'molv' : skin;
   }(conf.skin)) : 'default') +'" id="layui-laypage-'+ that.config.item +'">'+ view.join('') + function(){
     return conf.skip 
